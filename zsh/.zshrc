@@ -106,7 +106,15 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias cat=bat
+OS=$(uname -s)
+
+if [ "$OS" = "Linux" ]; then
+  alias cat=batcat
+elif [ "$OS" = "Darwin" ]; then
+  alias cat=bat
+else
+  alias cat=catbat
+fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
