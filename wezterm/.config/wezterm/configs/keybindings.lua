@@ -37,5 +37,9 @@ return {
 			mods = "ALT",
 			action = wezterm.action { SendString = "\x1bf" },
 		},
+		{ 	key = 'v',
+			mods = 'CTRL|SHIFT',
+			action = act.PasteFrom 'Clipboard'
+		},
 	},
 }
