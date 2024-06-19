@@ -11,7 +11,7 @@ end
 local dynamic_font_size = nil
 
 if is_linux() then
-	dynamic_font_size = 16.0
+	dynamic_font_size = 14.0
 end
 
 if is_darwin() then
