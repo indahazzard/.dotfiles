@@ -5,7 +5,7 @@ return {
 	version = "*",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
@@ -18,7 +18,7 @@ return {
 			popup_border_style = "rounded",
 			enable_diagnostics = true,
 			window = {
-				position = "right"
+				position = "float"
 			},
 			default_component_configs = {
 				modified = {
