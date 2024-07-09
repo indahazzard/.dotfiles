@@ -33,11 +33,11 @@ return {
 						deleted   = "D", -- this can only be used in the git_status source
 						renamed   = "R", -- this can only be used in the git_status source
 						-- Status type
-						untracked = "",
-						ignored   = "",
-						unstaged  = "",
-						staged    = "",
-						conflict  = "",
+						untracked = "U",
+						ignored   = "I",
+						unstaged  = "US",
+						staged    = "S",
+						conflict  = "C",
 					}
 				},
 				indent = {

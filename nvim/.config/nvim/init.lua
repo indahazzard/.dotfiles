@@ -597,8 +597,6 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false, desc = "Quit current buffe
 -- Save and Quit with leader key
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false, desc = "Save and quit current buffer" })
 
-vim.cmd([[nnoremap <leader>cf :Neotree reveal<cr>]])
-
 nnoremap("<leader>y", "<cmd>%y<cr>", { silent = false, desc = "Copy buffer content" })
 
 nnoremap("<leader>ly", "<cmd>:Telescope neoclip<cr>", { silent = false, desc = "Show all Yanks" })
