@@ -102,10 +102,6 @@ require('lazy').setup({
 			end,
 		},
 	},
-	{
-	  'freddiehaddad/feline.nvim',
-	  opts = {},
-	},
 	-- Fuzzy Finder (files, lsp, etc)
 	{
 		'nvim-telescope/telescope.nvim',
