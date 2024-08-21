@@ -464,7 +464,6 @@ local servers = {
 		filetypes = { "php" },
 		environment = {
 			includePaths = { "." },
-			phpVersion = "7.4.0"
 		},
 		files = {
 			exclude = {
@@ -617,4 +616,3 @@ nnoremap('<C-k>', "<cmd>:wincmd k<CR>", { silent = true, desc='To top window'})
 nnoremap('<C-j>', "<cmd>:wincmd j<CR>", { silent = true, desc='To bottom window'})
 nnoremap('<C-h>', "<cmd>:wincmd h<CR>", { silent = true, desc='To left window'})
 nnoremap('<C-l>', "<cmd>:wincmd l<CR>", { silent = true, desc='To right window'})
-nnoremap('<leader>u', "<cmd>Telescope undo<CR>", {silent = true, desc = 'Telescope Undo'})
