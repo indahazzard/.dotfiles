@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git zsh-autosuggestions ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -135,3 +135,4 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # Created by `pipx` on 2024-08-17 20:13:30
 export PATH="$PATH:/Users/mykytadotsenko/.local/bin"
+export PATH=/Users/mykytadotsenko/.nvm/versions/node/v18.18.2/bin:/opt/homebrew/opt/openjdk/bin:/Users/mykytadotsenko/.cargo/bin:/opt/homebrew/opt/openjdk/bin:/opt/homebrew/opt/openjdk/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Users/mykytadotsenko/.cargo/bin:/Users/mykytadotsenko/.local/bin:/opt/homebrew/opt/fzf/bin:/Users/mykytadotsenko/.local/bin:/Users/mykytadotsenko/.composer/vendor/bin

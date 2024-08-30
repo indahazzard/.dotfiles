@@ -33,7 +33,7 @@ require('lazy').setup({
 		'neovim/nvim-lspconfig',
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
-			'williamboman/mason.nvim',
+			{ 'williamboman/mason.nvim', config = true },
 			'williamboman/mason-lspconfig.nvim',
 
 			-- Useful status updates for LSP
@@ -135,10 +135,6 @@ require('lazy').setup({
 		'jwalton512/vim-blade'
 	},
 
-	-- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-	--       These are some example plugins that I've included in the kickstart repository.
-	--       Uncomment any of the lines below to enable them.
-	require 'kickstart.plugins.autoformat',
 	require 'kickstart.plugins.debug',
 
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -191,8 +187,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Enable autodidenting
-vim.opt.smartindent = true
-vim.opt.shiftwidth = 2
+vim.opt.smartindent = false
 
 -- Enable relative line numbers
 vim.opt.nu = true
@@ -365,7 +360,6 @@ local on_attach = function(_, bufnr)
 	nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 	nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 	nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-	nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
 
 	-- See `:help K` for why this keymap
 	nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
