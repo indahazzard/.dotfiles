@@ -187,7 +187,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Enable autodidenting
-vim.opt.smartindent = false
+vim.opt.smartindent = true
 
 -- Enable relative line numbers
 vim.opt.nu = true
