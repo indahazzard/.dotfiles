@@ -54,7 +54,6 @@ return {
 				local messages = file_data['messages']
 
 				for _, msg in ipairs(messages or {}) do
-					print(msg.type)
 					table.insert(diagnostics, {
 						lnum = msg.line - 1,
 						end_lnum = msg.line - 1,
