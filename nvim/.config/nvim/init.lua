@@ -480,6 +480,14 @@ local servers = {
 			}
 		},
 	},
+    volar = {
+        filetypes = {"vue"}
+    },
+    tsserver = {
+        filetypes = {
+            "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"
+        }
+    },
 	svelte = {
 		filetypes = { "svelte" },
 		cmd = { "svelteserver", "--stdio" },
