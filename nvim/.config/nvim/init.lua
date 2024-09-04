@@ -268,7 +268,7 @@ vim.defer_fn(function()
 	require('nvim-treesitter.configs').setup {
 		-- Add languages to be installed here that you want installed for treesitter
 		ensure_installed = { 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
-			'bash', 'php', 'html', 'css', 'markdown', 'svelte' },
+			'bash', 'php', 'html', 'css', 'markdown', 'svelte', 'vue' },
 
 		-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 		auto_install = false,
@@ -465,7 +465,7 @@ local servers = {
 		},
 		files = {
 			exclude = {
-				"*/*.blade.php"
+				"*/*.blade.php",
 			}
 		},
 		exclude = { "blade" },
@@ -480,19 +480,6 @@ local servers = {
 			}
 		},
 	},
-    volar = {
-        filetypes = {"vue"}
-    },
-    tsserver = {
-        filetypes = {
-            "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"
-        }
-    },
-	svelte = {
-		filetypes = { "svelte" },
-		cmd = { "svelteserver", "--stdio" },
-		root_dir = { "package.json", ".git" },
-	}
 }
 
 -- Setup neovim lua configuration
