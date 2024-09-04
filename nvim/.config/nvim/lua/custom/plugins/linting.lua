@@ -7,7 +7,6 @@ return {
 	config = function()
 		local lint = require("lint")
 
-
 		lint.linters.phpmd.args = {
 			'-',
 			'json',
@@ -50,7 +49,7 @@ return {
 
 			local diagnostics = {}
 
-			for file_path, file_data in pairs(decoded['files']) do
+			for _, file_data in pairs(decoded['files']) do
 				local messages = file_data['messages']
 
 				for _, msg in ipairs(messages or {}) do
