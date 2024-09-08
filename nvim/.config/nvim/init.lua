@@ -480,6 +480,20 @@ local servers = {
 			}
 		},
 	},
+vuels = {
+    vetur = {
+      useWorkspaceDependencies = true,
+      experimental = {
+        templateInterpolationService = true
+      },
+      validation = {
+        template = true,
+        script = true,
+        style = true
+      },
+    }
+}
+
 }
 
 -- Setup neovim lua configuration
