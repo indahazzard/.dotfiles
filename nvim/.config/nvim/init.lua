@@ -67,14 +67,6 @@ require('lazy').setup({
 		-- Adds git related signs to the gutter, as well as utilities for managing changes
 		'lewis6991/gitsigns.nvim',
 		opts = {
-			-- See `:help gitsigns.txt`
-			signs = {
-				add = { text = '+' },
-				change = { text = '~' },
-				delete = { text = '_' },
-				topdelete = { text = '‾' },
-				changedelete = { text = '~' },
-			},
 			on_attach = function(bufnr)
 				vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk,
 					{ buffer = bufnr, desc = 'Preview git hunk' })
@@ -578,6 +570,7 @@ cmp.setup {
 -- vim: ts=2 sts=2 sw=2 etc
 
 local nnoremap = require("custom.functions.keymap_utils").nnoremap
+local formatBuffer = require('custom.functions.format').format
 
 -- Center buffer while navigating
 nnoremap("<C-u>", "<C-u>zz")
@@ -623,3 +616,5 @@ nnoremap('<C-k>', "<cmd>:wincmd k<CR>", { silent = true, desc='To top window'})
 nnoremap('<C-j>', "<cmd>:wincmd j<CR>", { silent = true, desc='To bottom window'})
 nnoremap('<C-h>', "<cmd>:wincmd h<CR>", { silent = true, desc='To left window'})
 nnoremap('<C-l>', "<cmd>:wincmd l<CR>", { silent = true, desc='To right window'})
+
+nnoremap('<leader>cl', formatBuffer, { silent= true, desc='Format code'})
