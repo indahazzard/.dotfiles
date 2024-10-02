@@ -63,13 +63,13 @@ return {
 		dap.adapters.php = {
 		  type = 'executable',
 		  command = 'node',
-		  args = { "/Users/mykytadotsenko/.local/share/nvim/mason/packages/php-debug-adapter/extension/out/phpDebug.js"},
+		  args = { "/Users/"..os.getenv("USER").."/.local/share/nvim/mason/packages/php-debug-adapter/extension/out/phpDebug.js"},
 		}
 
 		dap.adapters.bash = {
 		  type = 'executable',
 		  command = 'node',
-		  args = { "/Users/mykytadotsenko/.local/share/nvim/mason/packages/bash-debug-adapter/extension/out/bashDebug.js"},
+		  args = { "/Users/"..os.getenv("USER").."/.local/share/nvim/mason/packages/bash-debug-adapter/extension/out/bashDebug.js"},
 		}
 		-- Basic debugging keymaps, feel free to change to your liking!
 		vim.keymap.set('n', '<leader>ds', dap.continue, { desc = 'Debug: Start/Continue' })
