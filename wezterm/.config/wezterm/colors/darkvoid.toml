@@ -1,0 +1,87 @@
+[metadata]
+name = "darkvoid"
+author = "indahazzard"
+origin_url = "https://your-theme-source-url.com"
+
+[colors]
+foreground = "#c0c0c0"  # fg
+background = "#1c1c1c"  # bg
+cursor_bg = "#bdfe58"  # cursor
+cursor_border = "#bdfe58"
+cursor_fg = "#1c1c1c"
+compose_cursor = "#1bfd9c"  # operator and search_highlight
+selection_bg = "#303030"  # visual
+selection_fg = "#c0c0c0"
+scrollbar_thumb = "#585858"  # comment
+split = "#404040"  # line_nr
+visual_bell = "#7fa1c3"  # info (LSP diagnostic)
+
+ansi = [
+    "#3c3c3c",  # eob
+    "#dea6a0",  # error (LSP diagnostic)
+    "#baffc9",  # added (gitsigns)
+    "#1bfd9c",  # operator / search_highlight
+    "#7fa1c3",  # info (LSP diagnostic)
+    "#66b2b2",  # bool
+    "#ffffba",  # changed (gitsigns)
+    "#d1d1d1"   # string
+]
+brights = [
+    "#4b8902",  # preprocessor
+    "#f1f1f1",  # kw
+    "#e1e1e1",  # func
+    "#c5c5c5",  # type_builtin
+    "#b2d8d8",  # constant
+    "#e6e6e6",  # bracket
+    "#b1b1b1",  # identifier
+    "#c0c0c0"   # fg (neutral highlight)
+]
+
+[colors.indexed]
+16 = "#bdfe58"  # cursor
+17 = "#1bfd9c"  # search_highlight
+
+[colors.tab_bar]
+background = "#1c1c1c"  # bg
+inactive_tab_edge = "#3c3c3c"  # eob
+inactive_tab_edge_hover = "#585858"  # comment
+
+[colors.tab_bar.active_tab]
+bg_color = "#585858"  # comment
+fg_color = "#c0c0c0"  # fg
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#303030"  # visual
+fg_color = "#b1b1b1"  # identifier
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#404040"  # line_nr
+fg_color = "#c0c0c0"  # fg
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab]
+bg_color = "#1c1c1c"  # bg
+fg_color = "#b1b1b1"  # identifier
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#404040"  # line_nr
+fg_color = "#c0c0c0"  # fg
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"

@@ -160,7 +160,7 @@ if.app-id = 'company.thebrowser.Browser'
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
-if.app-id = 'com.jetbrains.datagrip'
+if.app-id = 'com.sequel-ace.sequel-ace'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
