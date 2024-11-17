@@ -226,6 +226,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+-- ~/.config/nvim/init.lua or ~/.config/nvim/lua/telescope_setup.lua
+local ok, local_pickers = pcall(require, 'local_telescope_config')
 require('telescope').setup {
     defaults = {
         mappings = {
@@ -234,16 +236,8 @@ require('telescope').setup {
                 ['<C-d>'] = false,
             },
         },
-
     },
-    pickers = {
-        find_files = {
-            search_dirs = { ".", "./vendor/sigma", 'uci-sdk' }
-        },
-        live_grep = {
-            search_dirs = { ".", "./vendor/sigma", 'uci-sdk' }
-        },
-    }
+    pickers = ok and local_pickers or nil,
 }
 
 -- Enable telescope fzf native, if installed
