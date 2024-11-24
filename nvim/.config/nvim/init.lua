@@ -421,6 +421,19 @@ require('mason-lspconfig').setup()
 --
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
+local localServerSettingsLoaded, local_serverSettings = pcall(require, 'local_lsp_config')
+
+-- Recursive table merge function
+local function mergeTables(t1, t2)
+    for k, v in pairs(t2) do
+        if type(v) == "table" and type(t1[k]) == "table" then
+            mergeTables(t1[k], v)
+        else
+            t1[k] = v
+        end
+    end
+end
+
 local servers = {
     rust_analyzer = {
         assist = {
@@ -464,7 +477,9 @@ local servers = {
         },
         filetypes = { "php" },
         environment = {
-            includePaths = { "." },
+            includePaths = {
+                ".",
+            },
         },
         files = {
             exclude = {
@@ -474,11 +489,10 @@ local servers = {
         exclude = { "blade" },
     },
     html = {
-        filetypes = { 'html', 'blade', 'svelte' },
+        filetypes = { 'html', 'blade', 'svelte', 'vue' },
         files = {
             associations = {
                 [".blade.php"] = "html",
-                ["*.tpl"] = "html",
                 ["*.html"] = "html",
             }
         },
@@ -498,6 +512,10 @@ local servers = {
     }
 
 }
+
+if localServerSettingsLoaded then
+    mergeTables(servers, local_serverSettings)
+end
 
 -- Setup neovim lua configuration
 require('neodev').setup()
