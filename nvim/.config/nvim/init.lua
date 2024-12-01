@@ -487,6 +487,10 @@ local servers = {
             }
         },
         exclude = { "blade" },
+        references = {
+            exclude = {
+            }
+        }
     },
     html = {
         filetypes = { 'html', 'blade', 'svelte', 'vue' },
