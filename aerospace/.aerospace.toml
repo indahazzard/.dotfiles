@@ -180,5 +180,5 @@ if.app-id = 'org.telegram.desktop'
 run = 'move-node-to-workspace Q'
 
 [[on-window-detected]]
-if.app-id = 'com.spotify.client'
+if.app-id = 'com.apple.Music'
 run = 'move-node-to-workspace Q'
