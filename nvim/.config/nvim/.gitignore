@@ -1,5 +1,5 @@
 # Ignore local Telescope configuration
-lua/local_telescope_config.lua
+lua/custom/plugins/config/telescope/local_telescope_config.lua
 
 # local specific config
 lua/local_lsp_config.lua

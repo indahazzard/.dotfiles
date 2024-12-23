@@ -1,31 +1,32 @@
 -- File: lua/custom/plugins/theme.lua
 
 return {
-    "EdenEast/nightfox.nvim",
+    "scottmckendry/cyberdream.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-        require("nightfox").setup({
-            options = {
-                transparent = false
-            },
-            specs = {
-                NeoTreeNormal = {
-                    fg = "fg1",
-                    bg = "bg0"
+        require("cyberdream").setup({
+            borderless_telescope = false,
+            theme = {
+                colors = {
+                    bg = "#000000",
+                    bgAlt = "#23272b",
+                    bgHighlight = "#2e3338",
+                    fg = "#e0e0e0",
+                    grey = "#8a94a6",
+                    blue = "#4682b4",
+                    green = "#4caf50",
+                    cyan = "#40c4ff",
+                    red = "#e57373",
+                    yellow = "#ffd54f",
+                    magenta = "#ba68c8",
+                    pink = "#e573a1",
+                    orange = "#ffb74d",
+                    purple = "#9575cd",
                 },
             }
         })
-
         -- Apply the colorscheme
-        vim.cmd("colorscheme carbonfox")
-
-        -- Sync NeoTree with Normal background using the new API
-        local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
-        vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = normal_bg })
-        vim.api.nvim_set_hl(0, "NotifyBackground", { bg = '#000000' })
-
-        -- Remove color from NeoTree border
-        vim.api.nvim_set_hl(0, "NormalFloat", {bg="NONE"})
-    end,
+        vim.cmd("colorscheme cyberdream")
+    end
 }

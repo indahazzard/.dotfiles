@@ -17,9 +17,8 @@ return {
         },
     },
     config = function()
-        local ok, local_pickers = pcall(require, 'local_telescope_config')
         local custom_pick = require "custom.plugins.config.telescope.multigrep"
-
+        local ok, local_pickers = pcall(require, 'custom.plugins.config.telescope.local_telescope_config')
         require('telescope').setup {
             defaults = {
                 mappings = {
