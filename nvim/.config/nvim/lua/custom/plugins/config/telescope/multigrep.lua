@@ -2,34 +2,52 @@ local pickers = require "telescope.pickers"
 local finders = require "telescope.finders"
 local make_entry = require "telescope.make_entry"
 local conf = require "telescope.config".values
+local ok, local_pickers = pcall(require, 'custom.plugins.config.telescope.local_telescope_config')
 local M = {}
 
 M.live_multigrep = function (opts)
    opts = opts or {}
    opts.cwd = opts.cwd or vim.uv.cwd()
 
+   -- Safely fetch search_dirs from local_pickers
+   local search_dirs = {}
+   if ok and local_pickers and local_pickers.live_multigrep then
+       search_dirs = local_pickers.live_multigrep.search_dirs or {}
+   end
+
    local finder = finders.new_async_job {
        command_generator = function (prompt)
            if not prompt or prompt == "" then
-            return nil
+               return nil
            end
 
            local pieces = vim.split(prompt, "  ")
            local args = { "rg" }
 
+           -- Add the search pattern
            if pieces[1] then
-            table.insert(args, "-e")
-            table.insert(args, pieces[1])
+               table.insert(args, "-e")
+               table.insert(args, pieces[1])
            end
 
+           -- Add the glob pattern if provided
            if pieces[2] then
                table.insert(args, "-g")
                table.insert(args, pieces[2])
            end
 
+           -- Add directories to search in
+           if #search_dirs > 0 then
+               for _, dir in ipairs(search_dirs) do
+                   table.insert(args, dir)
+               end
+           else
+               table.insert(args, ".") -- Default to current directory
+           end
+
            return vim.tbl_flatten {
                args,
-               { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column",  "--smart-case"}
+               { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" }
            }
        end,
        entry_maker = make_entry.gen_from_vimgrep(opts),
@@ -41,7 +59,7 @@ M.live_multigrep = function (opts)
        prompt_title = "Multi Grep",
        finder = finder,
        previewer = conf.grep_previewer(opts),
-       sorter = require "telescope.sorters".empty()
+       sorter = require "telescope.sorters".empty(),
    }):find()
 end
 
