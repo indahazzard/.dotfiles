@@ -18,6 +18,7 @@ return {
     },
     config = function()
         local custom_pick = require "custom.plugins.config.telescope.multigrep"
+        local laravel_routes_pick = require "custom.plugins.config.telescope.laravel_route_list"
         local ok, local_pickers = pcall(require, 'custom.plugins.config.telescope.local_telescope_config')
         require('telescope').setup {
             defaults = {
@@ -55,6 +56,7 @@ return {
         vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
         vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
         vim.keymap.set('n', '<leader>sg', custom_pick.live_multigrep, { desc = '[S]earch by [G]rep (Custom Multi Grep)' })
+        vim.keymap.set('n', '<leader>lr', laravel_routes_pick.laravel_route, { desc = 'Laravel Route Finder' })
 
         local nnoremap = require("custom.functions.keymap_utils").nnoremap
 
