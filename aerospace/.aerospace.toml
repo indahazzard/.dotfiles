@@ -161,7 +161,10 @@ run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.sequel-ace.sequel-ace'
-run = 'move-node-to-workspace 3'
+run = [
+  "layout floating",
+  "move-node-to-workspace 3",
+]
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
@@ -182,3 +185,10 @@ run = 'move-node-to-workspace Q'
 [[on-window-detected]]
 if.app-id = 'com.apple.Music'
 run = 'move-node-to-workspace Q'
+
+[[on-window-detected]]
+if.app-id = "com.mitchellh.ghostty"
+run = [
+  "layout tiling",
+  "move-node-to-workspace 2",
+]

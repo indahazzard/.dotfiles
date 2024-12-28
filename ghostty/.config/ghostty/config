@@ -1,0 +1,6 @@
+font-family = BerkleyMono Nerd Font
+font-size = 18
+background = 16181a
+mouse-hide-while-typing = true
+window-colorspace = "display-p3"
+window-save-state = always
