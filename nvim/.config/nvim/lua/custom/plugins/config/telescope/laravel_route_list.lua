@@ -1,32 +1,68 @@
 local pickers = require "telescope.pickers"
 local finders = require "telescope.finders"
 local json_decode = vim.fn.json_decode
+local Path = require "plenary.path"
 
 local M = {}
+local lspconfig = require("mason-lspconfig")
+local get_client = function(server_name)
+    local clients = vim.lsp.get_clients { name = server_name }
+    local client = clients[1] or nil
+    local new_instance = false
+
+    if not client then
+        local server = lspconfig[server_name]
+
+        if not server then
+            error("LSP server not found: " .. server_name)
+        end
+
+        local client_id = vim.lsp.start(server.setup { root_dir = vim.loop.cwd() })
+
+        if not client_id then
+            error "Could not start lsp client"
+        end
+
+        client = vim.lsp.get_client_by_id(client_id)
+
+        new_instance = true
+    end
+
+    return client, new_instance
+end
 
 local function custom_lsp_workspace_symbols(opts)
     opts = opts or {}
     local query = opts.query or ""
+    local lsp, is_new_instance = get_client('intelephense')
 
-    vim.lsp.buf_request(0, "workspace/symbol", { query = query }, function(err, result, ctx)
-        if err then
-            vim.notify("Error fetching workspace symbols: " .. vim.inspect(err), vim.log.levels.ERROR)
-            return
+    if not lsp then
+        vim.notify("Lsp not found")
+    end
+
+    local resp = lsp.request_sync("workspace/symbol", { query = query }, nil)
+    local class_location = nil
+
+    for _, location in pairs(resp.result) do
+        if
+            location.location
+            and vim.lsp.protocol.SymbolKind[location.kind] or '' == "Class"
+        then
+            class_location = location
+            break
         end
+    end
 
-        local client = vim.lsp.get_client_by_id(ctx.client_id)
+    local filename = vim.uri_to_fname(class_location.location.uri)
 
-        if not client then
-            vim.notify("No valid LSP client found.", vim.log.levels.ERROR)
-            return
-        end
-        local offset_encoding = client.offset_encoding or "utf-16"
+    if vim.api.nvim_buf_get_name(0) ~= filename then
+        filename = Path:new(vim.fn.fnameescape(filename)):normalize(vim.loop.cwd())
+        pcall(vim.cmd, string.format("%s %s", "edit", filename))
+    end
 
-        local first_entry = result[1]
-        if first_entry and first_entry.location then
-            vim.lsp.util.jump_to_location(first_entry.location, offset_encoding)
-        end
-    end)
+    if is_new_instance then
+        vim.lsp.stop_client(lsp.id)
+    end
 end
 
 M.laravel_route = function(opts)
@@ -47,12 +83,14 @@ M.laravel_route = function(opts)
                 )
             }
         end,
+
         entry_maker = function(line)
             local route = json_decode(line)
             if route then
                 return {
                     value = route.uri,
-                    display = (route.method or "[no method]") .. " " .. (route.uri or "[no uri]") .. " " .. (route.name or "[no name]"),
+                    display = (route.method or "[no method]") ..
+                        " " .. (route.uri or "[no uri]") .. " " .. (route.name or "[no name]"),
                     ordinal = route.name or route.uri,
                     route = route,
                 }
@@ -80,8 +118,6 @@ M.laravel_route = function(opts)
                 else
                     print("Invalid entry or route")
                 end
-
-                -- actions.close(prompt_bufnr)
             end)
 
             return true
