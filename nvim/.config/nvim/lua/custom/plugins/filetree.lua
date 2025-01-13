@@ -9,15 +9,6 @@ return {
         "MunifTanjim/nui.nvim",
     },
     config = function()
-        vim.cmd([[
-        hi NormalFloat guibg=NONE
-        hi FloatBorder guibg=NONE
-        hi NeoTreeNormal guibg=NONE
-        hi NeoTreeNormalNC guibg=NONE
-        hi NeoTreeEndOfBuffer guibg=NONE
-        hi NeoTreeFloatNormal guibg=NONE
-        hi NeoTreeFloatBorder guibg=NONE guifg=#46c880
-        ]])
         require('neo-tree').setup {
             filesystem = {
                 filtered_items = {

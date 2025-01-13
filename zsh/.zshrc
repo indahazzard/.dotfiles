@@ -131,8 +131,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 # Created by `pipx` on 2024-08-17 20:13:30
-export PATH="$PATH:/Users/mykytadotsenko/.local/bin"
-export PATH=/Users/mykytadotsenko/.nvm/versions/node/v18.18.2/bin:/opt/homebrew/opt/openjdk/bin:/Users/mykytadotsenko/.cargo/bin:/opt/homebrew/opt/openjdk/bin:/opt/homebrew/opt/openjdk/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Users/mykytadotsenko/.cargo/bin:/Users/mykytadotsenko/.local/bin:/opt/homebrew/opt/fzf/bin:/Users/mykytadotsenko/.local/bin:/Users/mykytadotsenko/.composer/vendor/bin
+export PATH="$PATH:/Users/mykyta.v.dotsenko/.local/bin"
+export PATH=/Users/mykyta.v.dotsenko/.nvm/versions/node/v18.18.2/bin:/opt/homebrew/opt/openjdk/bin:/Users/mykyta.v.dotsenko/.cargo/bin:/opt/homebrew/opt/openjdk/bin:/opt/homebrew/opt/openjdk/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Users/mykyta.v.dotsenko/.cargo/bin:/Users/mykyta.v.dotsenko/.local/bin:/opt/homebrew/opt/fzf/bin:/Users/mykyta.v.dotsenko/.local/bin:/Users/mykyta.v.dotsenko/.composer/vendor/bin
 
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

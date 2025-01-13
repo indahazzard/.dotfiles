@@ -189,6 +189,6 @@ run = 'move-node-to-workspace Q'
 [[on-window-detected]]
 if.app-id = "com.mitchellh.ghostty"
 run = [
-  "layout tiling",
+  "layout floating",
   "move-node-to-workspace 2",
 ]
