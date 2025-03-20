@@ -13,6 +13,8 @@ return {
 			vim.loop.cwd() .. '/phpmd.xml'
 		}
 
+        lint.linters.phpmd.cmd = '/Users/mykyta.v.dotsenko/.composer/vendor/bin/phpmd'
+
 		lint.linters.phpcs.args = {
 			"-",
 			"--standard=" .. vim.loop.cwd() .. "/phpcs.xml",
@@ -26,6 +28,7 @@ return {
 			['HINT'] = vim.diagnostic.severity.HINT,
 		}
 		local bin = 'phpcs'
+        lint.linters.phpcs.cmd = '/Users/mykyta.v.dotsenko/.composer/vendor/bin/phpcs'
 		lint.linters.phpcs.parser = function(output, _)
 			if vim.trim(output) == '' or output == nil then
 				return {}

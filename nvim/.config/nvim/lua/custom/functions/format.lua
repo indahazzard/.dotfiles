@@ -11,8 +11,7 @@ local function format()
   local command = nil
 
   if extension == ".php" then
-      command = vim.loop.cwd().."/vendor/bin/phpcbf --standard=phpcs.xml "..filepath
-
+      command = "/Users/mykyta.v.dotsenko/.composer/vendor/bin/phpcbf --standard="..vim.loop.cwd().."/phpcs.xml "..filepath
       notificationTemplate('phpcbf')
   end
 
