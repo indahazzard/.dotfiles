@@ -2,7 +2,6 @@ return {
   'saghen/blink.cmp',
   dependencies = { 'rafamadriz/friendly-snippets' },
   version = '1.*',
-
   opts = {
     keymap = {
       preset = 'super-tab',
@@ -11,7 +10,17 @@ return {
       ['<C-d>'] = { function(cmp) cmp.scroll_documentation_down(4) end },
       ['<C-f>'] = { function(cmp) cmp.scroll_documentation_up(4) end },
       ['<C-Space>'] = { 'show', 'fallback' },
-      ['<CR>'] = { 'accept', 'hide' },
+      ['<CR>'] = {
+        function(cmp)
+          if cmp.is_visible() then
+            cmp.accept()
+            cmp.hide()
+            return true
+          end
+          return false
+        end,
+        'fallback'
+    },
       ['<Tab>'] = {
         'snippet_forward',
         'select_next',
