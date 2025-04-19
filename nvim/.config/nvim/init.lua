@@ -34,7 +34,6 @@ require('lazy').setup({
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
             { 'williamboman/mason.nvim', config = true },
-            'williamboman/mason-lspconfig.nvim',
 
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -169,6 +168,7 @@ vim.opt.fillchars = { eob = '~', horiz = '─', horizup = '─', horizdown = '�
 
 vim.diagnostic.config({ virtual_text = true })
 
+vim.opt.winborder = "rounded"
 
 -- [[ Basic Keymaps ]]
 
@@ -273,49 +273,21 @@ vim.keymap.set('n', '<leader>p', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-    -- NOTE: Remember that lua is a real programming language, and as such it is possible
-    -- to define small helper and utility functions so you don't have to repeat yourself
-    -- many times.
-    --
-    -- In this case, we create a function that lets us more easily define mappings specific
-    -- for LSP related items. It sets the mode, buffer and description for us each time.
-    local nmap = function(keys, func, desc)
-        if desc then
-            desc = 'LSP: ' .. desc
-        end
-
-        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-    end
-
-    nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-    nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-
-    -- See `:help K` for why this keymap
-    nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-    nmap('<leader>k', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-    -- Lesser used LSP functionality
-    nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-
-    -- Create a command `:Format` local to the LSP buffer
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        vim.lsp.buf.format()
-    end, { desc = 'Format current buffer with LSP' })
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover, {
-            border = "rounded",
-            title = "Documentation"
-        }
-    )
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help, {
-            border = "rounded"
-        }
-    )
 end
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("my.lsp", {}),
+    callback =  function(args)
+
+    end
+})
+
+vim.lsp.enable({
+    "html",
+    "intelephense",
+    "lua_ls",
+    "ts_ls",
+    "rust"
+})
 
 -- document existing key chains
 require('which-key').add({
@@ -328,148 +300,31 @@ require('which-key').add({
 })
 
 
--- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require('mason').setup({
     ui = {
         border = 'rounded'
     }
 })
-require('mason-lspconfig').setup()
-
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+-- local localServerSettingsLoaded, local_serverSettings = pcall(require, 'local_lsp_config')
 --
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
+-- -- Recursive table merge function
+-- local function mergeTables(t1, t2)
+--     for k, v in pairs(t2) do
+--         if type(v) == "table" and type(t1[k]) == "table" then
+--             mergeTables(t1[k], v)
+--         else
+--             t1[k] = v
+--         end
+--     end
+-- end
 --
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
-local localServerSettingsLoaded, local_serverSettings = pcall(require, 'local_lsp_config')
-
--- Recursive table merge function
-local function mergeTables(t1, t2)
-    for k, v in pairs(t2) do
-        if type(v) == "table" and type(t1[k]) == "table" then
-            mergeTables(t1[k], v)
-        else
-            t1[k] = v
-        end
-    end
-end
-
-local servers = {
-    rust_analyzer = {
-        assist = {
-            importEnforceGranularity = true,
-            importPrefix = "crate"
-        },
-        cargo = {
-            allFeatures = true
-        },
-        checkOnSave = {
-            -- default: `cargo check`
-            command = "clippy"
-        },
-        inlayHints = {
-            lifetimeElisionHints = {
-                enable = true,
-                useParameterNames = true
-            },
-        },
-        filetypes = { "rust" },
-    },
-
-    lua_ls = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    },
-    intelephense = {
-        stubs = {
-            "bcmath",
-            "bz2",
-            "calendar",
-            "Core",
-            "curl",
-            "zip",
-            "zlib",
-            "acf-pro",
-            "genesis",
-            "polylang"
-        },
-        filetypes = { "php" },
-        environment = {
-            includePaths = {
-                ".",
-            },
-        },
-        files = {
-            exclude = {
-                "*/*.blade.php",
-            }
-        },
-        exclude = { "blade" },
-        references = {
-            exclude = {
-            }
-        }
-    },
-    html = {
-        filetypes = { 'html', 'blade', 'svelte', 'vue' },
-        files = {
-            associations = {
-                [".blade.php"] = "html",
-                ["*.html"] = "html",
-            }
-        },
-    },
-    ts_ls = {
-        init_options = {
-            embeddedLanguages = {
-                html = true,
-            },
-            plugins = {
-                {
-                    name = "@vue/typescript-plugin",
-                    location = "~/.nvm/versions/node/v18.20.4/bin/typescript-language-server",
-                    languages = { "javascript", "typescript", "vue" },
-                },
-            },
-        },
-        filetypes = {
-            "javascript",
-            "typescript",
-            "vue",
-        },
-    },
-}
-
-if localServerSettingsLoaded then
-    mergeTables(servers, local_serverSettings)
-end
+-- if localServerSettingsLoaded then
+--     mergeTables(servers, local_serverSettings)
+-- end
 
 -- Setup neovim lua configuration
 require('neodev').setup()
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-    ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-    function(server_name)
-        require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = servers[server_name],
-            filetypes = (servers[server_name] or {}).filetypes,
-        }
-    end,
-}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 etc

@@ -15,10 +15,9 @@ return {
                     visible = true,
                 }
             },
-            popup_border_style = "rounded",
             enable_diagnostics = true,
             window = {
-                position = "float"
+                position = "right"
             },
             default_component_configs = {
                 modified = {
