@@ -168,8 +168,6 @@ vim.opt.fillchars = { eob = '~', horiz = '─', horizup = '─', horizdown = '�
 
 vim.diagnostic.config({ virtual_text = true })
 
-vim.opt.winborder = "rounded"
-
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -264,6 +262,8 @@ vim.defer_fn(function()
     }
 end, 0)
 
+-- Setup neovim lua configuration
+require('neodev').setup()
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
@@ -277,7 +277,14 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("my.lsp", {}),
     callback =  function(args)
+local orig_floating_preview = vim.lsp.util.open_floating_preview
 
+---@diagnostic disable-next-line: duplicate-set-field
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or "rounded"
+  return orig_floating_preview(contents, syntax, opts, ...)
+end
     end
 })
 
@@ -323,8 +330,6 @@ require('mason').setup({
 --     mergeTables(servers, local_serverSettings)
 -- end
 
--- Setup neovim lua configuration
-require('neodev').setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 etc
