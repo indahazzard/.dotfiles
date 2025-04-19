@@ -167,6 +167,8 @@ vim.opt.scrolloff = 8
 
 vim.opt.fillchars = { eob = '~', horiz = '─', horizup = '─', horizdown = '─' }
 
+vim.diagnostic.config({ virtual_text = true })
+
 
 -- [[ Basic Keymaps ]]
 
