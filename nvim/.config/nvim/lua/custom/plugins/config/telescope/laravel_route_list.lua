@@ -4,7 +4,6 @@ local json_decode = vim.fn.json_decode
 local Path = require "plenary.path"
 
 local M = {}
-local lspconfig = require("mason-lspconfig")
 local get_client = function(server_name)
     local clients = vim.lsp.get_clients { name = server_name }
     local client = clients[1] or nil
@@ -32,37 +31,44 @@ local get_client = function(server_name)
 end
 
 local function custom_lsp_workspace_symbols(opts)
-    opts = opts or {}
-    local query = opts.query or ""
-    local lsp, is_new_instance = get_client('intelephense')
+  opts = opts or {}
+  local query = opts.query or ""
 
-    if not lsp then
-        vim.notify("Lsp not found")
+  local clients = vim.lsp.get_active_clients({
+    name = "intelephense",
+  })
+
+  if vim.tbl_isempty(clients) then
+    vim.notify("[LSP] intelephense is not attached", vim.log.levels.WARN)
+    return
+  end
+
+  local client = clients[1]
+  client.request("workspace/symbol", { query = query }, function(err, result)
+    if err then
+      vim.notify("[LSP] " .. err.message, vim.log.levels.ERROR)
+      return
     end
 
-    local resp = lsp.request_sync("workspace/symbol", { query = query }, nil)
-    local class_location = nil
+    if not result or #result == 0 then
+      vim.notify("[LSP] No symbols found for query", vim.log.levels.INFO)
+      return
+    end
 
-    for _, location in pairs(resp.result) do
-        if
-            location.location
-            and vim.lsp.protocol.SymbolKind[location.kind] or '' == "Class"
-        then
-            class_location = location
-            break
+    for _, symbol in ipairs(result) do
+      if vim.lsp.protocol.SymbolKind[symbol.kind] == "Class" then
+        local uri = symbol.location.uri
+        local filename = vim.uri_to_fname(uri)
+
+        if vim.api.nvim_buf_get_name(0) ~= filename then
+          pcall(vim.cmd.edit, vim.fn.fnameescape(filename))
         end
+        return
+      end
     end
 
-    local filename = vim.uri_to_fname(class_location.location.uri)
-
-    if vim.api.nvim_buf_get_name(0) ~= filename then
-        filename = Path:new(vim.fn.fnameescape(filename)):normalize(vim.loop.cwd())
-        pcall(vim.cmd, string.format("%s %s", "edit", filename))
-    end
-
-    if is_new_instance then
-        vim.lsp.stop_client(lsp.id)
-    end
+    vim.notify("[LSP] Class not found", vim.log.levels.INFO)
+  end)
 end
 
 M.laravel_route = function(opts)
