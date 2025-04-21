@@ -137,3 +137,9 @@ export PATH=/Users/mykyta.v.dotsenko/.nvm/versions/node/v18.18.2/bin:/opt/homebr
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mykyta.v.dotsenko/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mykyta.v.dotsenko/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/mykyta.v.dotsenko/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mykyta.v.dotsenko/google-cloud-sdk/completion.zsh.inc'; fi
