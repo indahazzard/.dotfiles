@@ -270,21 +270,17 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>p', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-end
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("my.lsp", {}),
     callback =  function(args)
-local orig_floating_preview = vim.lsp.util.open_floating_preview
+        local orig_floating_preview = vim.lsp.util.open_floating_preview
 
----@diagnostic disable-next-line: duplicate-set-field
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or "rounded"
-  return orig_floating_preview(contents, syntax, opts, ...)
-end
+        ---@diagnostic disable-next-line: duplicate-set-field
+        function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+            opts = opts or {}
+            opts.border = opts.border or "rounded"
+            return orig_floating_preview(contents, syntax, opts, ...)
+        end
     end
 })
 
