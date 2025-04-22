@@ -309,23 +309,6 @@ require('mason').setup({
         border = 'rounded'
     }
 })
--- local localServerSettingsLoaded, local_serverSettings = pcall(require, 'local_lsp_config')
---
--- -- Recursive table merge function
--- local function mergeTables(t1, t2)
---     for k, v in pairs(t2) do
---         if type(v) == "table" and type(t1[k]) == "table" then
---             mergeTables(t1[k], v)
---         else
---             t1[k] = v
---         end
---     end
--- end
---
--- if localServerSettingsLoaded then
---     mergeTables(servers, local_serverSettings)
--- end
-
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 etc
