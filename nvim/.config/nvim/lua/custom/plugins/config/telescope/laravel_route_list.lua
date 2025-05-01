@@ -1,45 +1,19 @@
 local pickers = require "telescope.pickers"
 local finders = require "telescope.finders"
 local json_decode = vim.fn.json_decode
-local Path = require "plenary.path"
 
 local M = {}
-local get_client = function(server_name)
-    local clients = vim.lsp.get_clients { name = server_name }
-    local client = clients[1] or nil
-    local new_instance = false
-
-    if not client then
-        local server = lspconfig[server_name]
-
-        if not server then
-            error("LSP server not found: " .. server_name)
-        end
-
-        local client_id = vim.lsp.start(server.setup { root_dir = vim.loop.cwd() })
-
-        if not client_id then
-            error "Could not start lsp client"
-        end
-
-        client = vim.lsp.get_client_by_id(client_id)
-
-        new_instance = true
-    end
-
-    return client, new_instance
-end
 
 local function custom_lsp_workspace_symbols(opts)
   opts = opts or {}
   local query = opts.query or ""
 
   local clients = vim.lsp.get_active_clients({
-    name = "intelephense",
+    name = "phpactor",
   })
 
   if vim.tbl_isempty(clients) then
-    vim.notify("[LSP] intelephense is not attached", vim.log.levels.WARN)
+    vim.notify("[LSP] phpactor is not attached", vim.log.levels.WARN)
     return
   end
 
