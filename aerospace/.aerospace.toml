@@ -152,10 +152,6 @@ ctrl-alt-k = ['join-with up', 'mode main']
 ctrl-alt-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace 2' 
-
-[[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
 run = 'move-node-to-workspace 1'
 

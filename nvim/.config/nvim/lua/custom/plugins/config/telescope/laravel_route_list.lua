@@ -9,11 +9,11 @@ local function custom_lsp_workspace_symbols(opts)
   local query = opts.query or ""
 
   local clients = vim.lsp.get_active_clients({
-    name = "phpactor",
+    name = "intelephense",
   })
 
   if vim.tbl_isempty(clients) then
-    vim.notify("[LSP] phpactor is not attached", vim.log.levels.WARN)
+    vim.notify("[LSP] intelephense is not attached", vim.log.levels.WARN)
     return
   end
 

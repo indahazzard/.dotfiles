@@ -1,13 +1,14 @@
 font-family = Fira Code Regular
-font-size = 18
+font-size = 20
 font-feature = -calt
-background = 16181a
-background-opacity = 0.5
+background = #000000
 mouse-hide-while-typing = true
 window-colorspace = "display-p3"
 window-padding-color = background
 shell-integration-features = no-cursor
 cursor-style = block
+background-opacity = 0.8
+background-blur = true
 
 keybind = ctrl+shift+h=goto_split:left
 keybind = ctrl+shift+j=goto_split:bottom
@@ -15,3 +16,4 @@ keybind = ctrl+shift+k=goto_split:top
 keybind = ctrl+shift+l=goto_split:right
 keybind = ctrl+shift+v=paste_from_clipboard
 
+theme = cyberdream

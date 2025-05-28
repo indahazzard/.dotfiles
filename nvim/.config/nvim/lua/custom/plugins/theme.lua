@@ -1,15 +1,19 @@
 -- File: lua/custom/plugins/theme.lua
 
 return {
-    "aliqyan-21/darkvoid.nvim",
+    "scottmckendry/cyberdream.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-        require("darkvoid").setup({
+        require("cyberdream").setup({
+            saturation = 0.7,
+            borderless_pickers = true,
             transparent = true,
-            glow = false
+            extensions = {
+                telescope = false,
+            }
         })
         -- Apply the colorscheme
-        vim.cmd("colorscheme darkvoid")
+        vim.cmd("colorscheme cyberdream")
     end
 }

@@ -314,7 +314,7 @@ require('mason').setup({
 -- vim: ts=2 sts=2 sw=2 etc
 
 local nnoremap = require("custom.functions.keymap_utils").nnoremap
-local formatBuffer = require('custom.functions.format').format
+local vnoremap = require("custom.functions.keymap_utils").vnoremap
 
 -- Center buffer while navigating
 nnoremap("<C-u>", "<C-u>zz")
@@ -362,4 +362,8 @@ nnoremap('<C-j>', "<cmd>:wincmd j<CR>", { silent = true, desc = 'To bottom windo
 nnoremap('<C-h>', "<cmd>:wincmd h<CR>", { silent = true, desc = 'To left window' })
 nnoremap('<C-l>', "<cmd>:wincmd l<CR>", { silent = true, desc = 'To right window' })
 
-nnoremap('<leader>cl', formatBuffer, { silent = true, desc = 'Format code' })
+nnoremap("<C-a>", "<cmd>CodeCompanionActions<cr>", { silent = true, desc = 'Show AI actions'})
+nnoremap("<leader>ai", "<cmd>CodeCompanionChat Toggle<cr>", { silent = true, desc = 'Toggle AI chat visibility' })
+vnoremap("ga", "<cmd>CodeCompanionChat Add<cr>", { silent = true, desc = 'Add selected to AI chat' })
+
+vim.cmd([[cab cc CodeCompanion]])

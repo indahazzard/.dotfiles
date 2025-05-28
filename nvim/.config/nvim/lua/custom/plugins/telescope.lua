@@ -60,10 +60,7 @@ return {
 
         local nnoremap = require("custom.functions.keymap_utils").nnoremap
 
-        nnoremap('gd', function() require('telescope.builtin').lsp_definitions() end, { desc = '[G]oto [D]efinition' })
         nnoremap('gr', function() require('telescope.builtin').lsp_references() end, { desc = '[G]oto [R]eferences' })
-        nnoremap('gI', function() require('telescope.builtin').lsp_implementations() end,
-            { desc = '[G]oto [I]mplementation' })
         nnoremap('<leader>D', function() require('telescope.builtin').lsp_type_definitions() end,
             { desc = 'Type [D]efinition' })
         nnoremap('<leader>ly', "<cmd>Telescope neoclip<cr>", { silent = false, desc = "Show all Yanks" })

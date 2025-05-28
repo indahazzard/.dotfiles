@@ -143,3 +143,7 @@ if [ -f '/Users/mykyta.v.dotsenko/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/mykyta.v.dotsenko/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mykyta.v.dotsenko/google-cloud-sdk/completion.zsh.inc'; fi
+
+if [ -f ~/.zsh_secrets ]; then
+  source ~/.zsh_secrets
+fi
