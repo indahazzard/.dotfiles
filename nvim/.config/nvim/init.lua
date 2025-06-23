@@ -366,4 +366,5 @@ nnoremap("<C-a>", "<cmd>CodeCompanionActions<cr>", { silent = true, desc = 'Show
 nnoremap("<leader>ai", "<cmd>CodeCompanionChat Toggle<cr>", { silent = true, desc = 'Toggle AI chat visibility' })
 vnoremap("ga", "<cmd>CodeCompanionChat Add<cr>", { silent = true, desc = 'Add selected to AI chat' })
 
+-- Define a command-line abbreviation 'cc' for 'CodeCompanion'
 vim.cmd([[cab cc CodeCompanion]])
